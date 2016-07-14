@@ -25,9 +25,8 @@ class ArgParser:
         return func(line) if func else None
 
 class DirArgParser(ArgParser):
-    def path(self, line):
-        # 2016/03/19  22:13    <DIR>          新建文件夹
-        # 2015/07/20  03:41         2,217,217 大数据高性能排序算
+    def __init__(self):
+        super().__init__()
         re_date = '(?:19|20)\\d{2}/(?:0\\d|1[0-2])/(?:[0-2]\\d|3[01])'
         re_time = '(?:[01]\\d|2[0-3])\\:[0-5]\\d'
         re_type = '(?:   <DIR>         |[ ,\\d]{17})'
@@ -36,17 +35,47 @@ class DirArgParser(ArgParser):
             re_time,
             re_type,
         )
-        m = re.match(re_exp, line)
+        self._regex = re.compile(re_exp)
+
+    def path(self, line):
+        # 2016/03/19  22:13    <DIR>          XXX
+        # 2015/07/20  03:41         2,217,217 XXX
+        m = self._regex.match(line)
         ret = m.groups()[0] if m else None
         if ret in ['.', '..']:
             return None
         else:
             return ret
 
+class AcdcliArgParser(ArgParser):
+    def __init__(self):
+        super().__init__()
+        self._regex = re.compile('^\\[([^ ]+)\\] \\[[^\\]]*\\] (.+)$')
+
+    def id(self, line):
+        # [id] [A] path
+        m = self._regex.match(line)
+        if m == None:
+            print('None')
+            return None
+        else:
+            return m.groups()[0]
+
+    def path(self, line):
+        # [id] [A] path
+        m = self._regex.match(line)
+        if m == None:
+            return None
+        else:
+            return m.groups()[1]
+
 def create_parser(name):
     for case in switch(name):
         if case('dir'):
             return DirArgParser()
+        elif case('acdcli'):
+            return AcdcliArgParser()
+    return None
 
 def exec_line(parser, line, sbs, mbs):
     mbsc = mbs.copy()
