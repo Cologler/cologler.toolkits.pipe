@@ -20,7 +20,7 @@ for each line, if any argument cannot parse, then ignore the line.
 ## available parser
 
 parser name|arg name|description
-:-|:-|:-
+:--|:--|:--
 dir|path|
 acdcli|id|
 acdcli|path|
