@@ -106,6 +106,9 @@ def parse_cmd(parser, rawcmd):
     for block in cmd:
         sbs.append(regex.split(block))
         mbs.append(regex.findall(block))
+    if len(mbs) == 0:
+        print('[ERROR]', 'cannot find any argument in command.')
+        return
     for line in sys.stdin.read().splitlines():
         exec_line(parser, line, sbs, mbs)
 
