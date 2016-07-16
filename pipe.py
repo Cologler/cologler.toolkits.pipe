@@ -6,10 +6,10 @@
 # 
 # ----------
 
-import os
 import sys
 import traceback
 import re
+import subprocess
 
 from jasily import switch
 
@@ -92,11 +92,7 @@ def exec_line(parser, line, sbs, mbs):
             mbc.insert(j * 2, sbs[i][j])
         mbc.append(sbs[i][-1])
         ces.append(''.join(mbc))
-    ces = ['"%s"' % z for z in ces]
-    ces[0] = ces[0][1:-1]
-    cmd = ' '.join(ces)
-    print(cmd)
-    os.system(cmd)
+    subprocess.call(ces)
 
 def parse_cmd(parser, rawcmd):
     cmd = rawcmd.copy()
