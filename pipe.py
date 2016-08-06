@@ -6,6 +6,7 @@
 # 
 # ----------
 
+import os
 import sys
 import traceback
 import re
@@ -46,6 +47,11 @@ class DirArgParser(ArgParser):
             return None
         else:
             return ret
+
+    def name(self, line):
+        path = self.path(line)
+        if path:
+            return os.path.split(path)[1]
 
 class AcdcliArgParser(ArgParser):
     def __init__(self):
