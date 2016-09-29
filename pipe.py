@@ -25,6 +25,10 @@ class ArgParser:
         func = self._available_args.get(arg_name)
         return func(line) if func else None
 
+class DefaultArgParser(ArgParser):
+    def line(self, line):
+        return line
+
 class DirArgParser(ArgParser):
     def __init__(self):
         super().__init__()
@@ -77,7 +81,9 @@ class AcdcliArgParser(ArgParser):
 
 def create_parser(name):
     for case in switch(name):
-        if case('dir'):
+        if case('def'):
+            return DefaultArgParser()
+        elif case('dir'):
             return DirArgParser()
         elif case('acdcli'):
             return AcdcliArgParser()
