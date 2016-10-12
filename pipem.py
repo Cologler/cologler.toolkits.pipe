@@ -15,7 +15,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
     try:
-        execute_pipe(argv, False)
+        execute_pipe(argv, True)
     except Exception:
         traceback.print_exc()
         input()
