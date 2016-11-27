@@ -7,6 +7,7 @@
 # ----------
 
 import re
+from ._common import ArgParser
 
 class AcdcliArgParser(ArgParser):
     def __init__(self):
