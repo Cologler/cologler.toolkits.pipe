@@ -19,11 +19,7 @@ class SubProcessExecutor(Executor):
         self._sps = []
 
     def execute(self, cmd_args: list):
-        self._sps.append(subprocess.Popen(cmd_args))
-
-    def end(self):
-        for sp in self._sps:
-            sp.wait()
+        subprocess.call(cmd_args)
 
 
 def main(argv=None):

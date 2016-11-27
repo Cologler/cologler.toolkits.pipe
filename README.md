@@ -17,13 +17,17 @@ for each line, if any argument cannot parse, then ignore the line.
 
 **Tip: you can try use `dir | pipe dir echo XXX` to see what command will be execute.**
 
+* pipe  use `os.system`  to send command.
+* pipes use `subprocess` to send command.
+* pipes use `subprocess` to concurrent send command.
+
 ## available parser
 
-parser name|arg name|description
-:--|:--|:--
-def|line|
-dir|name|
-dir|path|
-acdcli|id|
-acdcli|path|
+name  | param | desc
+:---  | :---- | :---
+ALL   | line  | origin line for all parser
+dir   | name  |
+dir   | path  |
+acdcli| id    |
+acdcli| path  |
 
