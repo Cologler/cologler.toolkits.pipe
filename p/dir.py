@@ -21,9 +21,6 @@ class DirArgParser(ArgParser):
     )
     REGEX = re.compile(RE_EXP)
 
-    def __init__(self):
-        super().__init__()
-
     def path(self, line):
         # 2016/03/19  22:13    <DIR>          XXX
         # 2015/07/20  03:41         2,217,217 XXX
